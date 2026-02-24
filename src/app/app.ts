@@ -8,7 +8,8 @@ import router from "./routes";
 const app: Application = express();
 
 //parsers
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 
@@ -22,11 +23,7 @@ app.use(
       "https://www.bdmbazar.com",
       "https://bdmbazar.com",
       "https://admin.bdmbazar.com",
-      "https://www.admin.bdmbazar.com",
-      "https://bdm-bazar-admin-two.vercel.app",
-      "https://bdm-bazar-customer.vercel.app",
-      "https://rokomari-customer-seven.vercel.app",
-      "*"
+      "https://www.admin.bdmbazar.com"
     ],
     credentials: true,
   })
@@ -37,7 +34,7 @@ app.use("/api/v1", router);
 
 //root route
 app.get("/", (req: Request, res: Response) => {
-  res.send("Rokomari server boosted on....🔥🔥🚀");
+  res.send("bdm bazar backend api server boosted on....🔥🔥🚀");
 });
 
 // //global error handler
