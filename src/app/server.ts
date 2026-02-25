@@ -12,7 +12,7 @@ async function main() {
     await mongoose.connect(config.database_url as string);
 
     server = app.listen(port, () => {
-      console.log(`Rokomari Backend Server listening on port ${port}`);
+      console.log(`Ruh24 Backend Server listening on port ${port}`);
     });
   } catch (err) {
     console.log(err);

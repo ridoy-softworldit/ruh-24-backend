@@ -38,13 +38,13 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
         httpOnly: true,
         secure: config_1.default.node_env === "production",
         sameSite: "none",
-        maxAge: 15 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,
     })
         .cookie("refreshToken", result === null || result === void 0 ? void 0 : result.refreshToken, {
         httpOnly: true,
         secure: config_1.default.node_env === "production",
         sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 3 * 24 * 60 * 60 * 1000,
     }), {
         success: true,
         statusCode: http_status_1.default.OK,
@@ -68,7 +68,7 @@ const loginUserUsingProvider = (0, catchAsync_1.default)((req, res) => __awaiter
         httpOnly: true,
         secure: config_1.default.node_env === "production",
         sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
     }), {
         success: true,
         statusCode: http_status_1.default.OK,
@@ -92,7 +92,7 @@ const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
         httpOnly: true,
         secure: config_1.default.node_env === "production",
         sameSite: "none",
-        maxAge: 15 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,
     }), {
         success: true,
         statusCode: http_status_1.default.OK,
@@ -152,6 +152,15 @@ const resetPassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         data: null,
     });
 }));
+const getMe = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield auth_service_1.AuthServices.getMeFromDB(req.user.email);
+    (0, sendResponse_1.default)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: "User data retrieved successfully!",
+        data: user,
+    });
+}));
 exports.AuthController = {
     registerUser,
     loginUser,
@@ -161,4 +170,5 @@ exports.AuthController = {
     changePassword,
     forgotPassword,
     resetPassword,
+    getMe,
 };

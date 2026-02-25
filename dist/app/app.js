@@ -22,10 +22,10 @@ app.use((0, cors_1.default)({
         "http://localhost:5000",
         "http://localhost:3000",
         "http://localhost:3001",
-        "https://www.bdmbazar.com",
-        "https://bdmbazar.com",
-        "https://admin.bdmbazar.com",
-        "https://www.admin.bdmbazar.com",
+        "https://www.ruh24.com",
+        "https://ruh24.com",
+        "https://admin.ruh24.com",
+        "https://www.admin.ruh24.com",
     ],
     credentials: true,
 }));
@@ -40,7 +40,7 @@ app.use((req, res, next) => {
 app.use("/api/v1", routes_1.default);
 //root route
 app.get("/", (req, res) => {
-    res.send("bdm bazar backend api server boosted on....🔥🔥🚀");
+    res.send("Ruh24 backend api server boosted on....🔥🔥🚀");
 });
 // //global error handler
 app.use(globalErrorHandler_1.default);

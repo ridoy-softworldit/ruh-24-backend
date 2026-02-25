@@ -28,13 +28,13 @@ const loginUser = catchAsync(async (req, res) => {
         httpOnly: true,
         secure: config.node_env === "production",
         sameSite: "none",
-        maxAge: 15 * 60 * 1000,
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .cookie("refreshToken", result?.refreshToken, {
         httpOnly: true,
         secure: config.node_env === "production",
         sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 3 * 24 * 60 * 60 * 1000,
       }),
     {
       success: true,
@@ -63,7 +63,7 @@ const loginUserUsingProvider = catchAsync(async (req, res) => {
         httpOnly: true,
         secure: config.node_env === "production",
         sameSite: "none",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 3 * 24 * 60 * 60 * 1000, // 3 days
       }),
     {
       success: true,
@@ -93,7 +93,7 @@ const refreshToken = catchAsync(async (req, res) => {
       httpOnly: true,
       secure: config.node_env === "production",
       sameSite: "none",
-      maxAge: 15 * 60 * 1000,
+      maxAge: 24 * 60 * 60 * 1000,
     }),
     {
       success: true,
@@ -170,6 +170,17 @@ const resetPassword = catchAsync(async (req, res) => {
   });
 });
 
+const getMe = catchAsync(async (req, res) => {
+  const user = await AuthServices.getMeFromDB(req.user.email);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User data retrieved successfully!",
+    data: user,
+  });
+});
+
 export const AuthController = {
   registerUser,
   loginUser,
@@ -179,4 +190,5 @@ export const AuthController = {
   changePassword,
   forgotPassword,
   resetPassword,
+  getMe,
 };

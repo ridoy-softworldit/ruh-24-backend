@@ -11,11 +11,11 @@ import { sendEmail } from "../../utils/sendEmail";
 // Helper to generate tokens
 const generateTokens = (payload: object) => {
   const accessToken = jwt.sign(payload, config.jwt_access_secret as string, {
-    expiresIn: "15m", // shorter-lived
+    expiresIn: "24h",
   });
 
   const refreshToken = jwt.sign(payload, config.jwt_refresh_secret as string, {
-    expiresIn: "7d", // longer-lived
+    expiresIn: "3d",
   });
 
   return { accessToken, refreshToken };
@@ -122,7 +122,7 @@ const refreshAccessToken = async (refreshToken: string) => {
     const accessToken = jwt.sign(
       jwtPayload,
       config.jwt_access_secret as string,
-      { expiresIn: "15m" }
+      { expiresIn: "24h" }
     );
 
     return { accessToken };
@@ -232,6 +232,16 @@ const resetPasswordInDB = async (token: string, newPassword: string) => {
   return {};
 };
 
+const getMeFromDB = async (email: string) => {
+  const user = await UserModel.findOne({ email }).select("-password");
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found!");
+  }
+
+  return user;
+};
+
 export const AuthServices = {
   registerUserOnDB,
   loginUserFromDB,
@@ -241,4 +251,5 @@ export const AuthServices = {
   changePasswordInDB,
   forgotPasswordInDB,
   resetPasswordInDB,
+  getMeFromDB,
 };
