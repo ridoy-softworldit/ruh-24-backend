@@ -24,6 +24,10 @@ app.use(
       "https://ruh24.com",
       "https://admin.ruh24.com",
       "https://www.admin.ruh24.com",
+      "https://ruh24-customer-neon.vercel.app",
+      "https://www.ruh24-customer-neon.vercel.app",
+      "https://www.https://ruh24-admin.vercel.app",
+      "https://https://ruh24-admin.vercel.app",
     ],
     credentials: true,
   })
