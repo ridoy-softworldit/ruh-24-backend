@@ -25,10 +25,17 @@ app.use((0, cors_1.default)({
         "https://www.bdmbazar.com",
         "https://bdmbazar.com",
         "https://admin.bdmbazar.com",
-        "https://www.admin.bdmbazar.com"
+        "https://www.admin.bdmbazar.com",
     ],
     credentials: true,
 }));
+// Prevent Vercel edge cache from caching CORS responses
+app.use((req, res, next) => {
+    res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
+    next();
+});
 //app routes
 app.use("/api/v1", routes_1.default);
 //root route
