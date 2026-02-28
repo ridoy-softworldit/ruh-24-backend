@@ -8,7 +8,7 @@ const sendContactMessageToDB = async (payload: TContact) => {
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
-        New Contact Form Submission from BDM Bazar
+        New Contact Form Submission from Ruh24
       </h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
@@ -24,7 +24,7 @@ const sendContactMessageToDB = async (payload: TContact) => {
       </div>
       
       <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 12px;">
-        <p>This email was sent from the contact form on BDM Bazar website.</p>
+        <p>This email was sent from the contact form on Ruh24 website.</p>
       </div>
     </div>
   `;

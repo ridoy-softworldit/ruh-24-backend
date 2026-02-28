@@ -1,4 +1,4 @@
-### BDM Bazar E-Commerce platform
+### Euh24 E-Commerce platform
 
 Live link : 
 
